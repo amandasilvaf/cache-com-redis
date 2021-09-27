@@ -15,10 +15,10 @@ class CreateProdutoCategoriasTable extends Migration
     {
         Schema::create('produto_categorias', function (Blueprint $table) {
             $table->unsignedBigInteger('categoria_id');
-            $table->foreign('categoria_id')->references('id')->on('categorias');
+            $table->foreign('categoria_id')->references('id')->on('categorias')->onDelete('cascade');
 
             $table->unsignedBigInteger('produto_id');
-            $table->foreign('produto_id')->references('id')->on('produtos');
+            $table->foreign('produto_id')->references('id')->on('produtos')->onDelete('cascade');
 
             $table->primary(['categoria_id', 'produto_id']);
             $table->timestamps();
@@ -33,5 +33,6 @@ class CreateProdutoCategoriasTable extends Migration
     public function down()
     {
         Schema::dropIfExists('produto_categorias');
+  
     }
 }
